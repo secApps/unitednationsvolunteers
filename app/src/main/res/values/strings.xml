@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">unitednationsvolunteers</string>
+    title_activity_login
+    <string name="title_activity_login">Home</string>
+    <string name="title_feed">Feed</string>
+    <string name="title_contact">Contact</string>
+    <string name="title_safety">Safety</string>
+    <string name="title_profile">Profile</string>
+    <string name="facebook_app_id">165067007561271</string>
+    <string name="fb_login_protocol_scheme">fb165067007561271</string>
+</resources>

@@ -1,0 +1,74 @@
+apply plugin: 'com.android.application'
+
+android {
+    compileSdkVersion 26
+    buildToolsVersion "26.0.2"
+    flavorDimensions "minSdkVersion"
+    defaultConfig {
+        applicationId "volunteers.un.unitednationsvolunteers"
+        minSdkVersion 15
+        targetSdkVersion 26
+        versionCode 1
+        versionName "1.0"
+        vectorDrawables.useSupportLibrary = true
+    }
+    productFlavors {
+
+        // Build variant with minSdk 16 to include Facebook and FirebaseUI libraries.
+        minSdkJellybean {
+            dimension "minSdkVersion"
+            minSdkVersion 16
+        }
+
+        // Build variant with minSdk 14, excludes Facebook and FirebaseUI libraries.
+        minSdkIcs {
+            dimension "minSdkVersion"
+            minSdkVersion 15
+        }
+
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+}
+
+dependencies {
+    implementation 'com.google.firebase:firebase-auth:11.6.0'
+    implementation 'com.android.support:support-v4:26.1.0'
+    implementation 'com.android.support.constraint:constraint-layout:1.0.2'
+    compile fileTree(dir: 'libs', include: ['*.jar'])
+    androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
+        exclude group: 'com.android.support', module: 'support-annotations'
+    })
+    // Google Sign In SDK (only required for Google Sign In)
+    compile 'com.google.android.gms:play-services-auth:11.6.0'
+    compile 'com.google.firebase:firebase-database:11.6.0'
+    compile 'com.firebaseui:firebase-ui-database:3.1.0'
+
+    // Firebase UI
+    // Used in FirebaseUIActivity. The FirebaseUI-Android library has a minSdk level of 16
+    // so this library is only included in the minSdkJellybean variant.
+    minSdkJellybeanCompile 'com.firebaseui:firebase-ui-auth:3.1.0'
+
+    // Facebook Android SDK (only required for Facebook Login)
+    // Used in FacebookLoginActivity. This is only compiled into the minSdkJellybean variant of this
+    // app. You can build a 'minSdkGingerbread' variant to test on devices with 9 <= SDK <= 15.
+    compile 'com.facebook.android:facebook-login:[4,5)'
+//    minSdkJellybeanCompile 'com.facebook.android:facebook-login:4.27.0'
+    minSdkJellybeanCompile 'com.android.support:customtabs:26.1.0'
+    compile 'com.android.support:appcompat-v7:26.+'
+    compile 'com.android.support:design:26.+'
+    compile 'com.android.support:support-vector-drawable:26.+'
+    compile 'org.jsoup:jsoup:1.11.2'
+    compile 'com.squareup.picasso:picasso:2.5.2'
+
+
+}
+
+
+
+
+apply plugin: 'com.google.gms.google-services'
