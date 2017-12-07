@@ -9,8 +9,10 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.TextView;
 
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
@@ -35,6 +37,7 @@ import java.util.List;
 import volunteers.un.unitednationsvolunteers.Fragments.MyPostsFragment;
 import volunteers.un.unitednationsvolunteers.Fragments.MyTopPostsFragment;
 import volunteers.un.unitednationsvolunteers.Fragments.PostListFragment;
+import volunteers.un.unitednationsvolunteers.Fragments.ProfileFragment;
 import volunteers.un.unitednationsvolunteers.Fragments.RecentPostsFragment;
 import volunteers.un.unitednationsvolunteers.Helpers.BottomNavigationViewHelper;
 import volunteers.un.unitednationsvolunteers.Models.User;
@@ -68,7 +71,7 @@ public class MainActivity extends AppCompatActivity {
                     mViewPager.setCurrentItem(2);
                     return true;
                 case R.id.navigation_profile:
-                    mViewPager.setCurrentItem(2);
+                    mViewPager.setCurrentItem(3);
                     return true;
             }
             return false;
@@ -82,19 +85,17 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         //FirebaseDatabase.getInstance().setPersistenceEnabled(true);
         mAuth = FirebaseAuth.getInstance();
-
-        database = FirebaseDatabase.getInstance().getReference();
-        database.child("notes").addValueEventListener(new ValueEventListener() {
+        Toolbar myToolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(myToolbar);
+        getSupportActionBar().setLogo(R.drawable.logo);
+//        getActionBar().setLogo(R.drawable.logo);
+        findViewById(R.id.chat).setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-               Log.d("access","OKAY");
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-                Log.d("access","NOT OKAY");
+            public void onClick(View v) {
+                startActivity(new Intent(MainActivity.this,ChatListActivity.class));
             }
         });
+        database = FirebaseDatabase.getInstance().getReference();
         mAuthListener = new FirebaseAuth.AuthStateListener() {
             @Override
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
@@ -111,12 +112,14 @@ public class MainActivity extends AppCompatActivity {
                         private final Fragment[] mFragments = new Fragment[] {
                                 new RecentPostsFragment(),
                                 new MyPostsFragment(),
-                                new MyTopPostsFragment()
+                                new MyTopPostsFragment(),
+                                new ProfileFragment()
                         };
                         private final String[] mFragmentNames = new String[] {
                                 getString(R.string.title_feed),
                                 getString(R.string.title_contact),
-                                getString(R.string.title_safety)
+                                getString(R.string.title_safety),
+                                getString(R.string.title_contact)
                         };
                         @Override
                         public Fragment getItem(int position) {
@@ -133,31 +136,31 @@ public class MainActivity extends AppCompatActivity {
                     };
                     mViewPager = findViewById(R.id.viewpager);
                     mViewPager.setAdapter(mPagerAdapter);
-                    mViewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
-                        @Override
-                        public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-
-                        }
-
-                        @Override
-                        public void onPageSelected(int position) {
-                            if (prevMenuItem != null) {
-                                prevMenuItem.setChecked(false);
-                            }
-                            else
-                            {
-                                navigation.getMenu().getItem(0).setChecked(false);
-                            }
-
-                            navigation.getMenu().getItem(position).setChecked(true);
-                            prevMenuItem = navigation.getMenu().getItem(position);
-                        }
-
-                        @Override
-                        public void onPageScrollStateChanged(int state) {
-
-                        }
-                    });
+//                    mViewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+//                        @Override
+//                        public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+//
+//                        }
+//
+//                        @Override
+//                        public void onPageSelected(int position) {
+//                            if (prevMenuItem != null) {
+//                                prevMenuItem.setChecked(false);
+//                            }
+//                            else
+//                            {
+//                                navigation.getMenu().getItem(0).setChecked(false);
+//                            }
+//
+//                            navigation.getMenu().getItem(position).setChecked(true);
+//                            prevMenuItem = navigation.getMenu().getItem(position);
+//                        }
+//
+//                        @Override
+//                        public void onPageScrollStateChanged(int state) {
+//
+//                        }
+//                    });
                    // signOut();
                     // User is signed in
                     Log.d("firebase", "onAuthStateChanged:signed_in:" + user.getUid());
@@ -190,6 +193,11 @@ public class MainActivity extends AppCompatActivity {
         if (mAuthListener != null) {
             mAuth.removeAuthStateListener(mAuthListener);
         }
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
     }
 
     private void signOut() {
@@ -228,7 +236,7 @@ public class MainActivity extends AppCompatActivity {
 
     // [START basic_write]
     private void writeNewUser(String userId, String name, String email) {
-        User user = new User(name, email);
+        User user = new User(name, email,"https://firebasestorage.googleapis.com/v0/b/volunteerapp-947b5.appspot.com/o/10464301_1004365186254170_4894037459494796009_n.jpg?alt=media&token=bf79b257-32e7-4613-b4e3-c0bd3a436025","017","address");
 
         database.child("users").child(userId).setValue(user);
     }

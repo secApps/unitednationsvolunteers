@@ -1,0 +1,220 @@
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colordarkWhite"
+    tools:context="volunteers.un.unitednationsvolunteers.Fragments.ProfileFragment">
+
+    <!-- TODO: Update blank fragment layout -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:orientation="horizontal"
+        android:id="@+id/line1"
+        android:layout_height="wrap_content">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+    <ImageView
+        android:id="@+id/profile"
+        android:layout_width="120dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="10dp"
+        android:layout_height="120dp"
+        android:src="@drawable/edit_pic" />
+        <ImageView
+            android:layout_width="120dp"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="10dp"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="20dp"
+            android:layout_height="150dp"
+            android:src="@drawable/undp_logo"/>
+        </RelativeLayout>
+    </LinearLayout>
+    <TextView
+        android:id="@+id/big_name"
+        android:layout_below="@id/line1"
+        android:layout_width="match_parent"
+        android:text="Mahmud Jarman"
+        android:gravity="center_horizontal"
+        android:textColor="@color/colorLighterBlue"
+        android:textStyle="bold"
+        android:textSize="30dp"
+        android:layout_marginLeft="7dp"
+        android:layout_height="wrap_content" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:orientation="vertical"
+        android:id="@+id/line2"
+        android:layout_margin="15dp"
+        android:layout_below="@id/big_name"
+        android:paddingTop="30dp"
+        android:layout_height="wrap_content">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:orientation="horizontal"
+            android:layout_height="30dp">
+        <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight=".30"
+            android:gravity="center_vertical"
+        android:background="@drawable/top_left_corner_rounded">
+        <TextView
+            android:layout_width="200dp"
+            android:text="Name"
+            android:textColor="#FFFF"
+            android:textStyle="bold"
+            android:textSize="17dp"
+            android:layout_marginLeft="7dp"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:gravity="center_vertical"
+            android:layout_weight=".70"
+            android:background="@drawable/top_right_corner_rounded">
+            <TextView
+                android:layout_width="match_parent"
+                android:id="@+id/user_name"
+                android:text="Mahmud Jarman"
+                android:textColor="@color/colorLighterBlue"
+                android:textStyle="bold"
+                android:textSize="17dp"
+                android:layout_marginLeft="7dp"
+                android:layout_height="wrap_content" />
+
+        </LinearLayout>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:orientation="horizontal"
+            android:layout_height="30dp">
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight=".30"
+                android:gravity="center_vertical"
+                android:background="@color/colorLighterBlue">
+                <TextView
+                    android:layout_width="200dp"
+                    android:text="Address"
+                    android:textSize="17dp"
+                    android:textColor="#FFFF"
+                    android:textStyle="bold"
+                    android:layout_marginLeft="7dp"
+                    android:layout_height="wrap_content" />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight=".70"
+                android:gravity="center_vertical"
+                android:background="#fff">
+                <TextView
+                    android:layout_width="match_parent"
+                    android:id="@+id/address"
+                    android:text="38/2, Shymoli"
+                    android:textSize="17dp"
+                    android:textColor="@color/colorLighterBlue"
+                    android:textStyle="bold"
+                    android:layout_marginLeft="7dp"
+                    android:layout_height="wrap_content" />
+
+            </LinearLayout>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:orientation="horizontal"
+            android:layout_height="30dp">
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight=".30"
+                android:gravity="center_vertical"
+                android:background="@color/colorLighterBlue">
+                <TextView
+                    android:layout_width="200dp"
+                    android:text="Phone"
+                    android:textSize="17dp"
+                    android:textColor="#FFFF"
+                    android:textStyle="bold"
+                    android:layout_marginLeft="7dp"
+                    android:gravity="center_vertical"
+                    android:layout_height="wrap_content" />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight=".70"
+                android:gravity="center_vertical"
+                android:background="#fff">
+                <TextView
+                    android:layout_width="match_parent"
+                    android:text="01721083054"
+                    android:id="@+id/phone"
+                    android:textSize="17dp"
+                    android:layout_marginLeft="7dp"
+                    android:textColor="@color/colorLighterBlue"
+                    android:textStyle="bold"
+                    android:gravity="center_vertical"
+                    android:layout_height="wrap_content" />
+
+            </LinearLayout>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:orientation="horizontal"
+            android:layout_height="30dp">
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:gravity="center_vertical"
+                android:layout_weight=".30"
+                android:background="@drawable/bottom_left_corner_rounded">
+                <TextView
+                    android:layout_width="200dp"
+                    android:text="Email"
+                    android:textSize="17dp"
+                    android:textColor="#FFFF"
+                    android:textStyle="bold"
+                    android:layout_marginLeft="7dp"
+                    android:layout_height="wrap_content" />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:gravity="center_vertical"
+                android:layout_weight=".70"
+                android:background="@drawable/bottom_right_corner_rounded">
+                <TextView
+                    android:layout_width="match_parent"
+                    android:id="@+id/email"
+                    android:text="jarman.cse@gmail.com"
+                    android:textSize="17dp"
+                    android:textColor="@color/colorLighterBlue"
+                    android:textStyle="bold"
+                    android:layout_marginLeft="7dp"
+                    android:layout_height="wrap_content" />
+
+            </LinearLayout>
+        </LinearLayout>
+
+    </LinearLayout>
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:id="@+id/mypost"
+        android:text="MY POSTS"
+        android:textColor="#FFFF"
+        android:textStyle="bold"
+        android:layout_below="@id/line2"
+        android:layout_marginLeft="70dp"
+        android:layout_marginRight="70dp"
+        android:layout_marginTop="30dp"
+        android:background="@drawable/rounded_shadow_button"/>
+
+
+</RelativeLayout>

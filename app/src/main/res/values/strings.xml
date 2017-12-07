@@ -1,6 +1,5 @@
 <resources>
-    <string name="app_name">unitednationsvolunteers</string>
-    title_activity_login
+    <string name="app_name">UNV Bangladesh</string>
     <string name="title_activity_login">Home</string>
     <string name="title_feed">Feed</string>
     <string name="title_contact">Contact</string>
@@ -8,4 +7,22 @@
     <string name="title_profile">Profile</string>
     <string name="facebook_app_id">165067007561271</string>
     <string name="fb_login_protocol_scheme">fb165067007561271</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="action_settings">Settings</string>
+    <string name="about">About</string>
+    <string name="login_success">login success</string>
+    <string name="login">LOGIN</string>
+    <string name="Username">Email</string>
+    <string name="Password">Password</string>
+    <string name="forgot_your_password">Forgot your password ?</string>
+    <string name="go">GO</string>
+    <string name="repeat_password">Repeat Password</string>
+    <string name="next">NEXT</string>
+    <string name="register">REGISTER</string>
+
+    <string name="hint_username">Enter a new username</string>
+    <string name="hint_email_reset">Enter your email</string>
+    <string name="enter_group_name">Enter group name</string>
 </resources>

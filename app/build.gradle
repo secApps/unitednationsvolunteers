@@ -47,12 +47,13 @@ dependencies {
     compile 'com.google.android.gms:play-services-auth:11.6.0'
     compile 'com.google.firebase:firebase-database:11.6.0'
     compile 'com.firebaseui:firebase-ui-database:3.1.0'
-
+    compile 'com.google.firebase:firebase-storage:11.6.0'
+    compile 'com.google.firebase:firebase-core:11.6.0'
     // Firebase UI
     // Used in FirebaseUIActivity. The FirebaseUI-Android library has a minSdk level of 16
     // so this library is only included in the minSdkJellybean variant.
     minSdkJellybeanCompile 'com.firebaseui:firebase-ui-auth:3.1.0'
-
+    compile 'com.yarolegovich:lovely-dialog:1.0.7'
     // Facebook Android SDK (only required for Facebook Login)
     // Used in FacebookLoginActivity. This is only compiled into the minSdkJellybean variant of this
     // app. You can build a 'minSdkGingerbread' variant to test on devices with 9 <= SDK <= 15.
@@ -64,9 +65,14 @@ dependencies {
     compile 'com.android.support:support-vector-drawable:26.+'
     compile 'org.jsoup:jsoup:1.11.2'
     compile 'com.squareup.picasso:picasso:2.5.2'
+    compile 'de.hdodenhof:circleimageview:2.2.0'
+    compile 'com.karumi:dexter:4.2.0'
+    compile 'id.zelory:compressor:2.1.0'
 
 
 }
+
+
 
 
 
