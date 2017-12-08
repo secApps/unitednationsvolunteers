@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -19,14 +20,15 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.squareup.picasso.Picasso;
 
 
 import java.util.ArrayList;
 import java.util.List;
 
+import volunteers.un.unitednationsvolunteers.Models.ChatUser;
 import volunteers.un.unitednationsvolunteers.Models.Comment;
 import volunteers.un.unitednationsvolunteers.Models.Post;
-import volunteers.un.unitednationsvolunteers.Models.User;
 
 public class PostDetailActivity extends BaseActivity implements View.OnClickListener {
 
@@ -139,17 +141,17 @@ public class PostDetailActivity extends BaseActivity implements View.OnClickList
 
     private void postComment() {
         final String uid = getUid();
-        FirebaseDatabase.getInstance().getReference().child("users").child(uid)
+        FirebaseDatabase.getInstance().getReference().child("user").child(uid)
                 .addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
                         // Get user information
-                        User user = dataSnapshot.getValue(User.class);
-                        String authorName = user.username;
+                        ChatUser user = dataSnapshot.getValue(ChatUser.class);
+                        String authorName = user.name;
 
                         // Create new comment object
                         String commentText = mCommentField.getText().toString();
-                        Comment comment = new Comment(uid, authorName, commentText);
+                        Comment comment = new Comment(uid, authorName, commentText,user.profileUrl);
 
                         // Push the comment, it will appear in the list
                         mCommentsReference.push().setValue(comment);
@@ -169,12 +171,14 @@ public class PostDetailActivity extends BaseActivity implements View.OnClickList
 
         public TextView authorView;
         public TextView bodyView;
+        public ImageView commenter;
 
         public CommentViewHolder(View itemView) {
             super(itemView);
 
             authorView = itemView.findViewById(R.id.comment_author);
             bodyView = itemView.findViewById(R.id.comment_body);
+            commenter = itemView.findViewById(R.id.comment_photo);
         }
     }
 
@@ -293,6 +297,10 @@ public class PostDetailActivity extends BaseActivity implements View.OnClickList
             Comment comment = mComments.get(position);
             holder.authorView.setText(comment.author);
             holder.bodyView.setText(comment.text);
+            Picasso.with(mContext).load(comment.profileUrl).fit().centerInside()
+                    .placeholder(R.drawable.com_facebook_profile_picture_blank_square)
+                    .error(R.drawable.com_facebook_profile_picture_blank_square)
+                    .into(holder.commenter);
         }
 
         @Override

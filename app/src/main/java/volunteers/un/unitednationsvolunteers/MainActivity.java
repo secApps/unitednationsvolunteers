@@ -2,7 +2,6 @@ package volunteers.un.unitednationsvolunteers;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.provider.ContactsContract;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
@@ -19,28 +18,19 @@ import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseAuthInvalidUserException;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.Query;
-import com.google.firebase.database.ValueEventListener;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import volunteers.un.unitednationsvolunteers.Fragments.MyPostsFragment;
+import volunteers.un.unitednationsvolunteers.Fragments.ContactFragment;
 import volunteers.un.unitednationsvolunteers.Fragments.MyTopPostsFragment;
-import volunteers.un.unitednationsvolunteers.Fragments.PostListFragment;
 import volunteers.un.unitednationsvolunteers.Fragments.ProfileFragment;
 import volunteers.un.unitednationsvolunteers.Fragments.RecentPostsFragment;
+import volunteers.un.unitednationsvolunteers.Fragments.UserProfileFragment;
 import volunteers.un.unitednationsvolunteers.Helpers.BottomNavigationViewHelper;
-import volunteers.un.unitednationsvolunteers.Models.User;
+import volunteers.un.unitednationsvolunteers.ui.LoginActivityChat;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -103,17 +93,17 @@ public class MainActivity extends AppCompatActivity {
                 user1= user;
 
                 if (user != null) {
-                    String username = usernameFromEmail(user.getEmail());
+                    //String username = usernameFromEmail(user.getEmail());
 
                     // Write new user
-                    writeNewUser(user.getUid(), username, user.getEmail());
+                    //writeNewUser(user.getUid(), username, user.getEmail());
                    // startActivity(new Intent(MainActivity.this,NewPostActivity.class));
                     mPagerAdapter = new FragmentPagerAdapter(getSupportFragmentManager()) {
                         private final Fragment[] mFragments = new Fragment[] {
                                 new RecentPostsFragment(),
-                                new MyPostsFragment(),
+                                new ContactFragment(),
                                 new MyTopPostsFragment(),
-                                new ProfileFragment()
+                                new UserProfileFragment()
                         };
                         private final String[] mFragmentNames = new String[] {
                                 getString(R.string.title_feed),
@@ -165,7 +155,7 @@ public class MainActivity extends AppCompatActivity {
                     // User is signed in
                     Log.d("firebase", "onAuthStateChanged:signed_in:" + user.getUid());
                 } else {
-                   startActivity(new Intent(MainActivity.this,LoginActivity.class));
+                   startActivity(new Intent(MainActivity.this,LoginActivityChat.class));
                     Log.d("firebase", "onAuthStateChanged:signed_out");
                 }
 
@@ -234,18 +224,18 @@ public class MainActivity extends AppCompatActivity {
                 });
     }
 
-    // [START basic_write]
-    private void writeNewUser(String userId, String name, String email) {
-        User user = new User(name, email,"https://firebasestorage.googleapis.com/v0/b/volunteerapp-947b5.appspot.com/o/10464301_1004365186254170_4894037459494796009_n.jpg?alt=media&token=bf79b257-32e7-4613-b4e3-c0bd3a436025","017","address");
-
-        database.child("users").child(userId).setValue(user);
-    }
-    private String usernameFromEmail(String email) {
-        if (email.contains("@")) {
-            return email.split("@")[0];
-        } else {
-            return email;
-        }
-    }
+//    // [START basic_write]
+//    private void writeNewUser(String userId, String name, String email) {
+//        User user = new User(name, email,"https://firebasestorage.googleapis.com/v0/b/volunteerapp-947b5.appspot.com/o/10464301_1004365186254170_4894037459494796009_n.jpg?alt=media&token=bf79b257-32e7-4613-b4e3-c0bd3a436025","017","address");
+//
+//        database.child("users").child(userId).setValue(user);
+//    }
+//    private String usernameFromEmail(String email) {
+//        if (email.contains("@")) {
+//            return email.split("@")[0];
+//        } else {
+//            return email;
+//        }
+//    }
 
 }

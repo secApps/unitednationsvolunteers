@@ -118,4 +118,11 @@ public class ImageUtils {
         return bs;
     }
 
+    public static byte[] convertBitmapToOutputStream(Bitmap bitmap){
+        ByteArrayOutputStream bos = new ByteArrayOutputStream();
+        bitmap.compress(Bitmap.CompressFormat.PNG, 0 /*ignored for PNG*/, bos);
+        byte[] bitmapdata = bos.toByteArray();
+        return bitmapdata;
+    }
+
 }

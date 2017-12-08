@@ -208,7 +208,7 @@ public class LoginActivityChat extends AppCompatActivity {
                             } else {
                                 initNewUserInfo();
                                 Toast.makeText(LoginActivityChat.this, "Register and Login success", Toast.LENGTH_SHORT).show();
-                                startActivity(new Intent(LoginActivityChat.this, MainActivityChat.class));
+                                startActivity(new Intent(LoginActivityChat.this, MainActivity.class));
                                 LoginActivityChat.this.finish();
                             }
                         }
@@ -266,7 +266,7 @@ public class LoginActivityChat extends AppCompatActivity {
                                         .show();
                             } else {
                                 saveUserInfo();
-                                startActivity(new Intent(LoginActivityChat.this, MainActivityChat.class));
+                                startActivity(new Intent(LoginActivityChat.this, MainActivity.class));
                                 LoginActivityChat.this.finish();
                             }
                         }

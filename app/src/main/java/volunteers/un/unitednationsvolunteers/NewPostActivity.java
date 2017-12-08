@@ -26,8 +26,8 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
+import volunteers.un.unitednationsvolunteers.Models.ChatUser;
 import volunteers.un.unitednationsvolunteers.Models.Post;
-import volunteers.un.unitednationsvolunteers.Models.User;
 
 public class NewPostActivity extends BaseActivity {
 
@@ -35,6 +35,7 @@ public class NewPostActivity extends BaseActivity {
     private static final String REQUIRED = "Required";
     ProgressDialog mProgressDialog;
     String websTitle= "", webDescription="", webImgurl="";
+    String profile_url = "";
     // [START declare_database_ref]
     private DatabaseReference mDatabase;
     // [END declare_database_ref]
@@ -89,12 +90,12 @@ public class NewPostActivity extends BaseActivity {
 
         // [START single_value_read]
         final String userId = getUid();
-        mDatabase.child("users").child(userId).addListenerForSingleValueEvent(
+        mDatabase.child("user").child(userId).addListenerForSingleValueEvent(
                 new ValueEventListener() {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
                         // Get user value
-                        User user = dataSnapshot.getValue(User.class);
+                        ChatUser user = dataSnapshot.getValue(ChatUser.class);
 
                         // [START_EXCLUDE]
                         if (user == null) {
@@ -104,6 +105,7 @@ public class NewPostActivity extends BaseActivity {
                                     "Error: could not fetch user.",
                                     Toast.LENGTH_SHORT).show();
                         } else {
+                            profile_url = user.profileUrl;
                             // Write new post
                             hiddentext.setText(mBodyField.getText().toString());
                             URLSpan spans[] = hiddentext.getUrls();
@@ -114,9 +116,9 @@ public class NewPostActivity extends BaseActivity {
 
                             }
                             if(url==null) {
-                                writeNewPost(websTitle,webDescription,webImgurl,userId, user.username, title, body);
+                                writeNewPost(websTitle,webDescription,webImgurl,userId, user.name, title, body);
                             }else{
-                                new FetchWebsiteData(url,userId, user.username, title, body).execute();
+                                new FetchWebsiteData(url,userId, user.name, title, body).execute();
                             }
                         }
 
@@ -152,7 +154,7 @@ public class NewPostActivity extends BaseActivity {
         // Create new post at /user-posts/$userid/$postid and at
         // /posts/$postid simultaneously
         String key = mDatabase.child("posts").push().getKey();
-        Post post = new Post(websiteTitle,websiteDescription,imgurl,userId, username, title, body);
+        Post post = new Post(websiteTitle,websiteDescription,imgurl,userId, username, title, body,profile_url);
         Map<String, Object> postValues = post.toMap();
 
         Map<String, Object> childUpdates = new HashMap<>();

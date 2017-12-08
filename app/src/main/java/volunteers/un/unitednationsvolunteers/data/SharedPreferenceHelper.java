@@ -4,7 +4,6 @@ import android.content.Context;
 import android.content.SharedPreferences;
 
 import volunteers.un.unitednationsvolunteers.Models.ChatUser;
-import volunteers.un.unitednationsvolunteers.Models.User;
 
 
 public class SharedPreferenceHelper {

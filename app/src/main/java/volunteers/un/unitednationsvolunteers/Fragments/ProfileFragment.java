@@ -13,7 +13,6 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.provider.MediaStore;
-import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
@@ -44,13 +43,12 @@ import com.karumi.dexter.listener.multi.MultiplePermissionsListener;
 import com.squareup.picasso.Picasso;
 
 import java.io.ByteArrayOutputStream;
-import java.io.IOException;
 import java.util.List;
 
 import volunteers.un.unitednationsvolunteers.Helpers.CircleTransform;
-import volunteers.un.unitednationsvolunteers.Models.User;
+import volunteers.un.unitednationsvolunteers.Models.ChatUser;
 import volunteers.un.unitednationsvolunteers.R;
-import volunteers.un.unitednationsvolunteers.service.MyUploadService;
+import volunteers.un.unitednationsvolunteers.data.StaticConfig;
 
 import static android.app.Activity.RESULT_OK;
 
@@ -61,7 +59,7 @@ public class ProfileFragment extends Fragment {
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
     public static final int MY_PERMISSIONS_REQUEST_READ_EXTERNAL_STORAGE = 123;
-    User user_profile_data;
+    ChatUser user_profile_data;
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
@@ -119,10 +117,8 @@ public class ProfileFragment extends Fragment {
                             hideProgressDialog();
                             Uri downloadUrl = taskSnapshot.getDownloadUrl();
                             Log.d("new_profile",downloadUrl.toString());
-                            User user = new User(user_profile_data.username, user_profile_data.email,downloadUrl.toString(),user_profile_data.phone,user_profile_data.address);
-
-
-                            mDatabase.setValue(user);
+                            ChatUser user = new ChatUser(user_profile_data.name, user_profile_data.email,downloadUrl.toString(),user_profile_data.phone,"default");
+                            mDatabase.child("profileUrl").setValue(downloadUrl.toString());
 
                         }
                     });
@@ -177,17 +173,17 @@ public class ProfileFragment extends Fragment {
         });
 
 
-        mDatabase = FirebaseDatabase.getInstance().getReference() .child("users").child(FirebaseAuth.getInstance().getCurrentUser().getUid());
+        mDatabase = FirebaseDatabase.getInstance().getReference().child("user").child(StaticConfig.UID);
         ValueEventListener postListener = new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 // Get Post object and use the values to update the UI
-                user_profile_data = dataSnapshot.getValue(User.class);
-                user_name_big.setText(user_profile_data.username);
-                user_name.setText(user_profile_data.username);
+                user_profile_data = dataSnapshot.getValue(ChatUser.class);
+                user_name_big.setText(user_profile_data.name);
+                user_name.setText(user_profile_data.name);
                 phone.setText(user_profile_data.phone);
                 email.setText(user_profile_data.email);
-                address.setText(user_profile_data.address);
+                address.setText("address");
                 Log.d("pic",user_profile_data.profileUrl);
                 Picasso.with(getContext()).load(user_profile_data.profileUrl).fit().centerInside()
                         .placeholder(R.drawable.edit_pic)

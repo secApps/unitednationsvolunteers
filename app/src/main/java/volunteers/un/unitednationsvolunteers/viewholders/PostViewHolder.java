@@ -22,6 +22,7 @@ public class PostViewHolder extends RecyclerView.ViewHolder {
     public TextView numStarsView;
     public TextView bodyView;
     public  ImageView imageView;
+    public  ImageView author_photo;
 
     public PostViewHolder(View itemView) {
         super(itemView);
@@ -32,6 +33,7 @@ public class PostViewHolder extends RecyclerView.ViewHolder {
         numStarsView = itemView.findViewById(R.id.post_num_stars);
         bodyView = itemView.findViewById(R.id.post_body);
         imageView = (ImageView)itemView.findViewById(R.id.image);
+        author_photo = (ImageView)itemView.findViewById(R.id.post_author_photo);
         imageView.setVisibility(View.GONE);
     }
 
@@ -40,6 +42,10 @@ public class PostViewHolder extends RecyclerView.ViewHolder {
         authorView.setText(post.author);
         numStarsView.setText(String.valueOf(post.starCount));
         bodyView.setText(post.body);
+        Picasso.with(c).load(post.profileUrl).fit().centerInside()
+                .placeholder(R.drawable.com_facebook_profile_picture_blank_square)
+                .error(R.drawable.com_facebook_profile_picture_blank_square)
+                .into(author_photo);
         if(post.imgurl!=null)
         if(post.imgurl.isEmpty()){
             imageView.setVisibility(View.GONE);

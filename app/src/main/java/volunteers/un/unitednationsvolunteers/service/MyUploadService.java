@@ -101,7 +101,7 @@ public class MyUploadService extends MyBaseTaskService {
 
                         // Get the public download URL
                         Uri downloadUri = taskSnapshot.getMetadata().getDownloadUrl();
-                        FirebaseDatabase.getInstance().getReference().child("users").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child("profileUrl").setValue(downloadUri);
+                        FirebaseDatabase.getInstance().getReference().child("user").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child("profileUrl").setValue(downloadUri);
 
                         // [START_EXCLUDE]
                         broadcastUploadFinished(downloadUri, fileUri);
