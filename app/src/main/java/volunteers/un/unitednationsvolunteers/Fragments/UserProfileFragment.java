@@ -72,7 +72,7 @@ public class UserProfileFragment extends Fragment {
     private UserInfoAdapter infoAdapter;
 
     private static final String USERNAME_LABEL = "Username";
-    private static final String MYPOSTS_LABEL = "My timeline";
+    private static final String MYPOSTS_LABEL = "Timeline";
     private static final String EMAIL_LABEL = "Email";
     private static final String SIGNOUT_LABEL = "Sign out";
     private static final String RESETPASS_LABEL = "Change Password";
@@ -282,7 +282,7 @@ public class UserProfileFragment extends Fragment {
 
         Configuration emailConfig = new Configuration(EMAIL_LABEL, myAccount.email, R.drawable.ic_email_black_24px);
         listConfig.add(emailConfig);
-        Configuration postConfig = new Configuration(MYPOSTS_LABEL, "Read my posts", R.drawable.ic_dashboard_black_24dp);
+        Configuration postConfig = new Configuration(MYPOSTS_LABEL, "Checkout your posts", R.drawable.ic_dashboard_black_24dp);
         listConfig.add(postConfig);
 
         Configuration resetPass = new Configuration(RESETPASS_LABEL, "", R.drawable.ic_enhanced_encryption_black_24px);

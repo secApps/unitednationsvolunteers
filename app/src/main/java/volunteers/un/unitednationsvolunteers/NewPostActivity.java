@@ -4,9 +4,11 @@ import android.app.ProgressDialog;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
+import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 import android.text.style.URLSpan;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -42,24 +44,26 @@ public class NewPostActivity extends BaseActivity {
 
     private EditText mTitleField;
     private EditText mBodyField;
+    TextView post;
     private TextView hiddentext;
-    private FloatingActionButton mSubmitButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_post);
-
+        Toolbar myToolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(myToolbar);
+        getSupportActionBar().setTitle("Create Post");
+        getSupportActionBar().setHomeButtonEnabled(true);
         // [START initialize_database_ref]
         mDatabase = FirebaseDatabase.getInstance().getReference();
         // [END initialize_database_ref]
 
         mTitleField = findViewById(R.id.field_title);
         mBodyField = findViewById(R.id.field_body);
-        mSubmitButton = findViewById(R.id.fab_submit_post);
         hiddentext= (TextView)findViewById(R.id.hiddentext);
-
-        mSubmitButton.setOnClickListener(new View.OnClickListener() {
+        post =(TextView)findViewById(R.id.submit_post);
+        post.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 submitPost();
@@ -143,9 +147,9 @@ public class NewPostActivity extends BaseActivity {
         mTitleField.setEnabled(enabled);
         mBodyField.setEnabled(enabled);
         if (enabled) {
-            mSubmitButton.setVisibility(View.VISIBLE);
+            post.setVisibility(View.VISIBLE);
         } else {
-            mSubmitButton.setVisibility(View.GONE);
+            post.setVisibility(View.GONE);
         }
     }
 
@@ -225,6 +229,14 @@ public class NewPostActivity extends BaseActivity {
             writeNewPost(websTitle,webDescription,imgurl,userId, username, title, body);
 
         }
+
+    }
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == android.R.id.home) {
+            finish(); // close this activity and return to preview activity (if there is any)
+        }
+        return super.onOptionsItemSelected(item);
 
     }
 }

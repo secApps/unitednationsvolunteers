@@ -26,7 +26,8 @@
             <TextView
                 android:layout_gravity="center"
                 android:textSize="24sp"
-                android:textColor="@android:color/black"
+                android:textColor="@color/colorLighterBlue"
+                android:textStyle="bold"
                 android:layout_marginTop="20dp"
                 android:id="@+id/tv_username"
                 android:layout_width="wrap_content"

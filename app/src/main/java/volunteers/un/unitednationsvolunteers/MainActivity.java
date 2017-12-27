@@ -28,6 +28,7 @@ import volunteers.un.unitednationsvolunteers.Fragments.ContactFragment;
 import volunteers.un.unitednationsvolunteers.Fragments.MyTopPostsFragment;
 import volunteers.un.unitednationsvolunteers.Fragments.ProfileFragment;
 import volunteers.un.unitednationsvolunteers.Fragments.RecentPostsFragment;
+import volunteers.un.unitednationsvolunteers.Fragments.SafetyFragment;
 import volunteers.un.unitednationsvolunteers.Fragments.UserProfileFragment;
 import volunteers.un.unitednationsvolunteers.Helpers.BottomNavigationViewHelper;
 import volunteers.un.unitednationsvolunteers.ui.LoginActivityChat;
@@ -77,7 +78,8 @@ public class MainActivity extends AppCompatActivity {
         mAuth = FirebaseAuth.getInstance();
         Toolbar myToolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(myToolbar);
-        getSupportActionBar().setLogo(R.drawable.logo);
+        getSupportActionBar().setLogo(R.drawable.ic_un_logo);
+        getSupportActionBar().setTitle("Knowledge hub");
 //        getActionBar().setLogo(R.drawable.logo);
         findViewById(R.id.chat).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -102,7 +104,7 @@ public class MainActivity extends AppCompatActivity {
                         private final Fragment[] mFragments = new Fragment[] {
                                 new RecentPostsFragment(),
                                 new ContactFragment(),
-                                new MyTopPostsFragment(),
+                                new SafetyFragment(),
                                 new UserProfileFragment()
                         };
                         private final String[] mFragmentNames = new String[] {
