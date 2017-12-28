@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="@color/colorIndivateTab">
+    android:background="@color/backgroungBlue">
 
 
     <ImageButton
@@ -15,7 +15,8 @@
         android:background="#00000000"
         android:padding="10dp"
         android:scaleType="centerInside"
-        android:src="@drawable/ic_send" />
+        android:src="@drawable/ic_send"
+        android:layout_alignParentRight="true" />
 
     <View
         android:id="@+id/line"
@@ -45,9 +46,13 @@
         android:drawablePadding="20dp"
         android:inputType="textLongMessage"
         android:maxLines="1"
+        android:hint="Write here..."
         android:paddingLeft="7dp"
         android:paddingRight="7dp"
         android:textColorHint="#aeafaf"
-        android:textSize="15sp" />
+        android:textSize="15sp"
+        android:layout_alignParentLeft="true"
+        android:layout_marginRight="20dp"
+        android:layout_toLeftOf="@id/btnSend" />
 
 </RelativeLayout>

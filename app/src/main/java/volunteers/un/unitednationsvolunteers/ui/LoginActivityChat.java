@@ -3,8 +3,10 @@ package volunteers.un.unitednationsvolunteers.ui;
 import android.annotation.SuppressLint;
 import android.app.ActivityOptions;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
@@ -34,8 +36,11 @@ import volunteers.un.unitednationsvolunteers.MainActivity;
 import volunteers.un.unitednationsvolunteers.MainActivityChat;
 import volunteers.un.unitednationsvolunteers.Models.ChatUser;
 import volunteers.un.unitednationsvolunteers.R;
+import volunteers.un.unitednationsvolunteers.data.FriendDB;
+import volunteers.un.unitednationsvolunteers.data.GroupDB;
 import volunteers.un.unitednationsvolunteers.data.SharedPreferenceHelper;
 import volunteers.un.unitednationsvolunteers.data.StaticConfig;
+import volunteers.un.unitednationsvolunteers.service.ServiceUtils;
 
 
 public class LoginActivityChat extends AppCompatActivity {
@@ -75,6 +80,7 @@ public class LoginActivityChat extends AppCompatActivity {
      */
     private void initFirebase() {
         //Khoi tao thanh phan de dang nhap, dang ky
+//        FirebaseDatabase.getInstance().setPersistenceEnabled(true);
         mAuth = FirebaseAuth.getInstance();
         authUtils = new AuthUtils();
         mAuthListener = new FirebaseAuth.AuthStateListener() {
@@ -126,7 +132,7 @@ public class LoginActivityChat extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == StaticConfig.REQUEST_CODE_REGISTER && resultCode == RESULT_OK) {
-            authUtils.createUser(data.getStringExtra(StaticConfig.STR_EXTRA_USERNAME), data.getStringExtra(StaticConfig.STR_EXTRA_PASSWORD));
+            authUtils.createUser(data.getStringExtra(StaticConfig.STR_EXTRA_USERNAME), data.getStringExtra(StaticConfig.STR_EXTRA_PASSWORD), data.getStringExtra(StaticConfig.STR_EXTRA_PHONE));
         }
     }
 
@@ -171,7 +177,7 @@ public class LoginActivityChat extends AppCompatActivity {
          * @param email
          * @param password
          */
-        void createUser(String email, String password) {
+        void createUser(String email, String password, final String phone) {
             waitingDialog.setIcon(R.drawable.ic_add_friend)
                     .setTitle("Registering....")
                     .setTopColorRes(R.color.colorPrimary)
@@ -206,9 +212,9 @@ public class LoginActivityChat extends AppCompatActivity {
                                         .setCancelable(false)
                                         .show();
                             } else {
-                                initNewUserInfo();
-                                Toast.makeText(LoginActivityChat.this, "Register and Login success", Toast.LENGTH_SHORT).show();
-                                startActivity(new Intent(LoginActivityChat.this, MainActivity.class));
+                                initNewUserInfo(phone);
+                                Toast.makeText(LoginActivityChat.this, "Welcome to Knowledge hub, You can start after you are approved by our admin", Toast.LENGTH_SHORT).show();
+                                startActivity(new Intent(LoginActivityChat.this, ApprovalActivity.class));
                                 LoginActivityChat.this.finish();
                             }
                         }
@@ -244,6 +250,11 @@ public class LoginActivityChat extends AppCompatActivity {
                             // signed in user can be handled in the listener.
                             waitingDialog.dismiss();
                             if (!task.isSuccessful()) {
+                                Log.d("LOGIN ERROR", task.getException().toString());
+                                if (task.getException().toString().contains("disabled")) {
+                                    startActivity(new Intent(LoginActivityChat.this, ApprovalActivity.class));
+                                    LoginActivityChat.this.finish();
+                                }else{
                                 Log.w(TAG, "signInWithEmail:failed", task.getException());
                                 new LovelyInfoDialog(LoginActivityChat.this) {
                                     @Override
@@ -264,6 +275,7 @@ public class LoginActivityChat extends AppCompatActivity {
                                         .setCancelable(false)
                                         .setConfirmButtonText("Ok")
                                         .show();
+                            }
                             } else {
                                 saveUserInfo();
                                 startActivity(new Intent(LoginActivityChat.this, MainActivity.class));
@@ -360,12 +372,41 @@ public class LoginActivityChat extends AppCompatActivity {
         /**
          * Khoi tao thong tin mac dinh cho tai khoan moi
          */
-        void initNewUserInfo() {
+        void initNewUserInfo(String phone) {
             ChatUser newUser = new ChatUser();
             newUser.email = user.getEmail();
             newUser.name = user.getEmail().substring(0, user.getEmail().indexOf("@"));
             newUser.avata = StaticConfig.STR_DEFAULT_BASE64;
+            newUser.phone = phone;
             FirebaseDatabase.getInstance().getReference().child("user/" + user.getUid()).setValue(newUser);
+            FirebaseAuth.getInstance().signOut();
+            FriendDB.getInstance(LoginActivityChat.this).dropDB();
+            GroupDB.getInstance(LoginActivityChat.this).dropDB();
+            ServiceUtils.stopServiceFriendChat(LoginActivityChat.this, true);
+
+        }
+    }
+
+    public  boolean is_first_time_login(){
+        Boolean isFirstTime;
+
+        SharedPreferences app_preferences = PreferenceManager
+                .getDefaultSharedPreferences(LoginActivityChat.this);
+
+        SharedPreferences.Editor editor = app_preferences.edit();
+
+        isFirstTime = app_preferences.getBoolean("isFirstTime", true);
+
+        if (isFirstTime) {
+
+//implement your first time logic
+            editor.putBoolean("isFirstTime", false);
+            editor.commit();
+            return true;
+
+        }else{
+            return  false;
+//app open directly
         }
     }
 }

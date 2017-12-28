@@ -45,6 +45,7 @@
             android:orientation="horizontal"
             android:layout_height="wrap_content">
             <ImageButton
+                android:id="@+id/call"
                 android:layout_height="wrap_content"
                 android:layout_width="wrap_content"
                 android:layout_weight="1"
@@ -54,6 +55,7 @@
                 android:background="@color/transparent"
                 android:src="@drawable/ic_call_black_24px"/>
             <ImageButton
+                android:id="@+id/email"
                 android:layout_height="wrap_content"
                 android:layout_width="wrap_content"
                 android:layout_weight="1"
@@ -62,6 +64,7 @@
                 android:tint="#9E9E9E"
                 android:src="@drawable/ic_email_black_24px"/>
             <ImageButton
+                android:id="@+id/sms"
                 android:layout_height="wrap_content"
                 android:layout_width="wrap_content"
                 android:layout_weight="1"
@@ -70,6 +73,7 @@
                 android:tint="#9E9E9E"
                 android:src="@drawable/ic_textsms_black_24px"/>
             <ImageButton
+                android:id="@+id/chat"
                 android:layout_height="wrap_content"
                 android:layout_width="wrap_content"
                 android:layout_weight="1"

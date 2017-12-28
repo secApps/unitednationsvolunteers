@@ -32,7 +32,7 @@ public class RegisterActivity extends AppCompatActivity {
     CardView cvAdd;
     private final Pattern VALID_EMAIL_ADDRESS_REGEX =
             Pattern.compile("^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,6}$", Pattern.CASE_INSENSITIVE);
-    private EditText editTextUsername, editTextPassword, editTextRepeatPassword;
+    private EditText editTextUsername, editTextPassword, editTextRepeatPassword,editphone;
     public static String STR_EXTRA_ACTION_REGISTER = "register";
 
     @Override
@@ -43,11 +43,13 @@ public class RegisterActivity extends AppCompatActivity {
         cvAdd = (CardView) findViewById(R.id.cv_add);
         editTextUsername = (EditText) findViewById(R.id.et_username);
         editTextPassword = (EditText) findViewById(R.id.et_password);
+        editphone = (EditText)findViewById(R.id.et_phone);
         editTextRepeatPassword = (EditText) findViewById(R.id.et_repeatpassword);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             ShowEnterAnimation();
         }
         fab.setOnClickListener(new View.OnClickListener() {
+            @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
             @Override
             public void onClick(View v) {
                 animateRevealClose();
@@ -113,6 +115,7 @@ public class RegisterActivity extends AppCompatActivity {
         mAnimator.start();
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     public void animateRevealClose() {
         Animator mAnimator = ViewAnimationUtils.createCircularReveal(cvAdd,cvAdd.getWidth()/2,0, cvAdd.getHeight(), fab.getWidth() / 2);
         mAnimator.setDuration(500);
@@ -142,15 +145,17 @@ public class RegisterActivity extends AppCompatActivity {
         String username = editTextUsername.getText().toString();
         String password = editTextPassword.getText().toString();
         String repeatPassword = editTextRepeatPassword.getText().toString();
-        if(validate(username, password, repeatPassword)){
+        String phone = editphone.getText().toString();
+        if(validate(username, password, repeatPassword,phone)){
             Intent data = new Intent();
             data.putExtra(StaticConfig.STR_EXTRA_USERNAME, username);
+            data.putExtra(StaticConfig.STR_EXTRA_PHONE, phone);
             data.putExtra(StaticConfig.STR_EXTRA_PASSWORD, password);
             data.putExtra(StaticConfig.STR_EXTRA_ACTION, STR_EXTRA_ACTION_REGISTER);
             setResult(RESULT_OK, data);
             finish();
         }else {
-            Toast.makeText(this, "Invalid email or not match password", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Invalid email or not match password or invalid phone number", Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -160,8 +165,8 @@ public class RegisterActivity extends AppCompatActivity {
      * @param password
      * @return
      */
-    private boolean validate(String emailStr, String password, String repeatPassword) {
+    private boolean validate(String emailStr, String password, String repeatPassword, String phone) {
         Matcher matcher = VALID_EMAIL_ADDRESS_REGEX .matcher(emailStr);
-        return password.length() > 0 && repeatPassword.equals(password) && matcher.find();
+        return password.length() > 0 && repeatPassword.equals(password) && matcher.find() && phone.length()>=11 ;
     }
 }

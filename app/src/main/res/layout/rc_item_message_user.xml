@@ -13,14 +13,16 @@
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
         android:layout_marginEnd="5dp"
-        android:src="@drawable/default_avata" />
+        android:src="@drawable/default_avata"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="5dp" />
 
     <TextView
         android:id="@+id/textContentUser"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
-        android:background="@drawable/rounded_corner1"
+        android:background="@drawable/rounded_corner1_chat"
         android:padding="10dp"
         android:layout_alignParentTop="true"
         android:layout_toStartOf="@id/imageView2"
@@ -28,6 +30,9 @@
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:layout_marginStart="20dp"
         android:text="a"
-        android:textColor="#ffffff" />
+        android:textColor="#FFFF"
+        android:layout_toLeftOf="@id/imageView2"
+        android:layout_marginRight="5dp"
+        android:layout_marginLeft="20dp" />
 
 </RelativeLayout>

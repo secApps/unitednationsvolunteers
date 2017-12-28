@@ -8,6 +8,7 @@ public class StaticConfig {
     public static String STR_EXTRA_ACTION_RESET = "resetpass";
     public static String STR_EXTRA_ACTION = "action";
     public static String STR_EXTRA_USERNAME = "username";
+    public static String STR_EXTRA_PHONE = "phone";
     public static String STR_EXTRA_PASSWORD = "password";
     public static String STR_DEFAULT_BASE64 = "default";
     public static String UID = "";

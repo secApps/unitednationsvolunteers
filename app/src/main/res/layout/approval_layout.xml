@@ -7,7 +7,7 @@
     <android.support.v7.widget.CardView
         android:id="@+id/cv"
         android:layout_width="300dp"
-        android:layout_height="wrap_content"
+        android:layout_height="300dp"
         android:layout_centerInParent="true"
         app:cardCornerRadius="6dp"
         app:cardElevation="3dp"
@@ -36,15 +36,15 @@
                     android:layout_centerVertical="true"
                     android:layout_marginStart="50dp"
                     android:layout_marginLeft="50dp"
-                    android:text="@string/login"
-                    android:textColor="#FFCC00"
+                    android:text="Thank You !"
+                    android:textColor="@color/colorPrimary"
                     android:textSize="18sp"
                     android:textStyle="bold" />
             </RelativeLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="50dp"
+                android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 android:orientation="horizontal"
                 android:paddingEnd="30dp"
@@ -52,51 +52,26 @@
                 android:paddingLeft="50dp"
                 android:paddingStart="50dp">
 
-                <android.support.design.widget.TextInputLayout
+                <TextView
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:textColorHint="#c5c5c5">
-
-                    <EditText
-                        android:id="@+id/et_username"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:background="@drawable/selector_bg_edit"
-                        android:hint="@string/Username"
-                        android:inputType="textEmailAddress"
-                        android:paddingBottom="2dp"
-                        android:textColor="#2fa881"
-                        android:textCursorDrawable="@drawable/bg_input_cursor"
-                        android:textSize="20sp" />
-                </android.support.design.widget.TextInputLayout>
+                    android:text="You are almost there !"
+                    android:layout_height="wrap_content" />
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:orientation="horizontal"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
                 android:paddingEnd="30dp"
                 android:paddingRight="30dp"
                 android:paddingLeft="50dp"
                 android:paddingStart="50dp">
 
-                <android.support.design.widget.TextInputLayout
+                <TextView
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:textColorHint="#c5c5c5">
+                    android:text="User Security is our first priority. Please give us some time to approve your account by the admin"
+                    android:layout_height="wrap_content" />
 
-                    <EditText
-                        android:id="@+id/et_password"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:background="@drawable/selector_bg_edit"
-                        android:hint="@string/Password"
-                        android:inputType="textPassword"
-                        android:paddingBottom="10dp"
-                        android:textColor="#2fa881"
-                        android:textCursorDrawable="@drawable/bg_input_cursor"
-                        android:textSize="20sp" />
-                </android.support.design.widget.TextInputLayout>
             </LinearLayout>
 
             <RelativeLayout
@@ -111,7 +86,7 @@
                     android:layout_height="50dp"
                     android:background="@drawable/bt_shape"
                     android:stateListAnimator="@drawable/state_list_animator_z"
-                    android:text="@string/go"
+                    android:text="Login"
                     android:textColor="#d3d3d3"
                     android:onClick="clickLogin"/>
             </RelativeLayout>
@@ -121,26 +96,13 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="5dp"
-                android:text="@string/forgot_your_password"
-                android:textColor="#9a9a9a"
+                android:text="We appreciate your patience"
+                android:textColor="@color/colorLighterBlue"
                 android:textSize="12sp"
                 android:onClick="clickResetPassword"/>
         </LinearLayout>
     </android.support.v7.widget.CardView>
 
-    <android.support.design.widget.FloatingActionButton
-        android:id="@+id/fab"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignEnd="@id/cv"
-        android:layout_alignRight="@id/cv"
-        android:layout_alignTop="@id/cv"
-        android:layout_marginEnd="-20dp"
-        android:layout_marginRight="-20dp"
-        android:layout_marginTop="25dp"
-        android:onClick="clickRegisterLayout"
-        android:src="@drawable/ic_signup"
-        android:transitionName="loginFab"
-        app:fabSize="normal" />
+
 
 </RelativeLayout>

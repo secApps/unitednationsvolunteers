@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">UNV Bangladesh</string>
+    <string name="app_name">Knowledge Hub</string>
     <string name="title_activity_login">Home</string>
     <string name="title_feed">Feed</string>
     <string name="title_contact">Contact</string>
@@ -18,7 +18,7 @@
     <string name="Password">Password</string>
     <string name="forgot_your_password">Forgot your password ?</string>
     <string name="go">GO</string>
-    <string name="repeat_password">Repeat Password</string>
+    <string name="repeat_password">Repeat password</string>
     <string name="next">NEXT</string>
     <string name="register">REGISTER</string>
 

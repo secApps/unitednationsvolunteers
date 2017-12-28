@@ -76,7 +76,7 @@ public abstract class ContactListFragment extends Fragment {
             @Override
             public ContactViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
                 LayoutInflater inflater = LayoutInflater.from(viewGroup.getContext());
-                return new ContactViewHolder(inflater.inflate(R.layout.contact_item, viewGroup, false));
+                return new ContactViewHolder(inflater.inflate(R.layout.contact_item, viewGroup, false),getActivity());
             }
 
             @Override
