@@ -52,6 +52,7 @@
             android:layout_height="wrap_content" />
         <Button
             android:layout_width="match_parent"
+            android:id="@+id/update_location"
             android:layout_marginTop="10dp"
             android:layout_marginRight="45dp"
             android:text="Update Location"
@@ -61,10 +62,11 @@
             android:layout_height="wrap_content" />
         <Button
             android:layout_width="match_parent"
+            android:id="@+id/unsafe"
             android:layout_marginTop="10dp"
             android:layout_marginRight="45dp"
             android:layout_marginLeft="45dp"
-            android:text="Safe Peoples"
+            android:text="SAFETY LIST"
             android:textColor="#FFFF"
             android:background="@drawable/rounded_shadow_button"
             android:layout_height="wrap_content" />

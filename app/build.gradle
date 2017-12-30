@@ -33,6 +33,15 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+    packagingOptions {
+        exclude 'META-INF/rxjava.properties'
+    }
+    repositories {
+        maven {
+            url "https://jitpack.io"
+        }
+
+    }
 }
 
 dependencies {
@@ -68,9 +77,11 @@ dependencies {
     compile 'de.hdodenhof:circleimageview:2.2.0'
     compile 'com.karumi:dexter:4.2.0'
     compile 'id.zelory:compressor:2.1.0'
+    compile 'com.firebase:geofire-android:2.2.0'
 
 
 }
+
 
 
 

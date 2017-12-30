@@ -4,11 +4,10 @@ import android.Manifest;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.content.pm.PackageManager;
+import android.content.res.ColorStateList;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.support.annotation.NonNull;
-import android.support.v4.app.ActivityCompat;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.util.Base64;
@@ -38,7 +37,6 @@ import com.yarolegovich.lovelydialog.LovelyProgressDialog;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import volunteers.un.unitednationsvolunteers.ChatListActivity;
 import volunteers.un.unitednationsvolunteers.Helpers.CircleTransform;
 import volunteers.un.unitednationsvolunteers.Models.ChatUser;
 import volunteers.un.unitednationsvolunteers.Models.Friend;
@@ -52,7 +50,7 @@ import volunteers.un.unitednationsvolunteers.ui.ChatActivity;
  * Created by jarman on 12/8/17.
  */
 
-public class ContactViewHolder extends RecyclerView.ViewHolder {
+public class SafetyViewHolder extends RecyclerView.ViewHolder {
 
     public TextView nameView;
     public TextView emailView;
@@ -64,9 +62,10 @@ public class ContactViewHolder extends RecyclerView.ViewHolder {
     private ListFriend dataListFriend = null;
     private ArrayList<String> listFriendID = null;
 
-    public ContactViewHolder(View itemView, Activity context) {
+    public SafetyViewHolder(View itemView, Activity context) {
         super(itemView);
         this.context = context;
+        card = itemView.findViewById(R.id.card);
         nameView = itemView.findViewById(R.id.contact_name);
         emailView = itemView.findViewById(R.id.contact_email);
         profileView = (ImageView) itemView.findViewById(R.id.contact_author_photo);
@@ -90,6 +89,15 @@ public class ContactViewHolder extends RecyclerView.ViewHolder {
     public void bindToContact(Context c, final ChatUser user) {
         nameView.setText(user.name);
         emailView.setText(user.email);
+        if(user.is_safe){
+
+            card.setCardBackgroundColor( c.getResources().getColor(R.color.colorCardView));
+            nameView.setTextColor( c.getResources().getColor(R.color.colorLightBlue));
+            emailView.setTextColor( c.getResources().getColor(R.color.colorLighterBlue));
+           // call.setBackgroundTintList(ColorStateList.valueOf(c.getResources().getColor(R.color.black_overlay)));
+        }else{
+            card.setCardBackgroundColor( c.getResources().getColor(R.color.red_800));
+        }
         call.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

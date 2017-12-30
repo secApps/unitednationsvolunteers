@@ -10,6 +10,9 @@ public class ChatUser {
     public String profileUrl;
     public String phone;
     public Message message;
+    public double latitude;
+    public double longitude;
+    public  boolean is_safe;
 
 
     public ChatUser(){
@@ -23,6 +26,9 @@ public class ChatUser {
         message.idSender = "0";
         message.text = "";
         message.timestamp = 0;
+        latitude = 0.0;
+        longitude = 0.0;
+        is_safe=true;
     }
 
     public ChatUser(String name, String email, String profileUrl, String phone, String address) {

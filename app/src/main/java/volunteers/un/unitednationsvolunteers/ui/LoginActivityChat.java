@@ -378,6 +378,7 @@ public class LoginActivityChat extends AppCompatActivity {
             newUser.name = user.getEmail().substring(0, user.getEmail().indexOf("@"));
             newUser.avata = StaticConfig.STR_DEFAULT_BASE64;
             newUser.phone = phone;
+            newUser.is_safe=true;
             FirebaseDatabase.getInstance().getReference().child("user/" + user.getUid()).setValue(newUser);
             FirebaseAuth.getInstance().signOut();
             FriendDB.getInstance(LoginActivityChat.this).dropDB();
