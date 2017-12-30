@@ -42,6 +42,7 @@ public class MainActivityChat extends AppCompatActivity {
 
     private FirebaseAuth mAuth;
     private FirebaseAuth.AuthStateListener mAuthListener;
+
     private FirebaseUser user;
 
     @Override
